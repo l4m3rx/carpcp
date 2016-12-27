@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BMW CAN Project</title>
+      <link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css") }}">
+      <link rel="stylesheet" href="{{ static_url("css/jquery-ui.css") }}">
+
+      <script type="text/javascript" src="{{ static_url("js/jquery.min.js") }}"></script>
+      <script type="text/javascript" src="{{ static_url("js/bootstrap.min.js") }}"></script>
+      <script type="text/javascript" src="{{ static_url("js/kendo.all.min.js") }}"></script>
+  </head>
+  <body>
+
+
+            <script>
+                function createDashboard() {
+                    $("#rpm").kendoRadialGauge({ theme: "black",
+                        pointer: { value: 0, color: "#ea7001" },
+                        scale: {
+                            startAngle: -45,
+                            endAngle: 120,
+                            min: 0,
+                            max: 5,
+                            majorUnit: 1,
+                            majorTicks: { width: 1, size: 7 },
+                            minorUnit: 0.2,
+                            minorTicks: { size: 5 },
+                            ranges: [{ from: 4, to: 4.5, color: "#ff7a00"},
+                                      {from: 4.5, to: 5, color: "#c20000"}],
+                            labels: { font: "11px Arial,Helvetica,sans-serif" }
+                        }
+                    });
+
+                    $("#kmh").kendoRadialGauge({ theme: "black",
+                        pointer: { value: 0, color: "#ea7001" },
+                        scale: {
+                            startAngle: -60, endAngle: 240,
+                            min: 0, max: 240,
+                            majorTicks: { width: 1, size: 14 },
+                            majorUnit: 20,
+                            minorTicks: { size: 10 },
+                            minorUnit: 2
+                        }
+                    });
+
+                    $("#fuel").kendoRadialGauge({ theme: "black",
+                        pointer: { value: 0.5, color: "#ea7001" },
+                        scale: {
+                            startAngle: 90, endAngle: 180,
+                            min: 0, max: 50,
+                            majorUnit: 25,
+                            majorTicks: { width: 2, size: 6 },
+                            minorUnit: 10,
+                            minorTicks: { size: 3 },
+                            ranges: [{ from: 0, to: 10, color: "#c20000" }],
+                            labels: { font: "9px Arial,Helvetica,sans-serif" }
+                        }
+                    });
+
+                    $("#water-temprature").kendoRadialGauge({ theme: "black",
+                        pointer: { value: 90, color: "#ea7001" },
+                        scale: {
+                            startAngle: 180, endAngle: 270,
+                            min: 40, max: 120,
+                            majorUnit: 40,
+                            majorTicks: { width: 2, size: 6 },
+                            minorUnit: 10,
+                            minorTicks: { size: 3 },
+                            ranges: [{ from: 110, to: 120, color: "#c20000" }],
+                            labels: { font: "9px Arial,Helvetica,sans-serif" }
+                        }
+                    });
+                }
+
+                   // function update() {
+                   //     $("#rpm").data("kendoRadialGauge").value(GEARS[gear] * speed + IDLE_RPM);
+                   //     $("#kmh").data("kendoRadialGauge").value(speed);
+                   // }
+
+                $(document).ready(function() {
+                    createDashboard();
+                });
+            </script>
+
+            <style>
+                #gauge-container { margin: 0 auto; overflow: hidden; width: 614px; height: 324px;
+                    background: transparent url("static/img/car-dashboard.png") no-repeat 50% 50%; }
+                .k-gauge { float: left; }
+                #rpm { width: 142px; height: 147px; margin: 85px 0 0 38px; }
+                #kmh { width: 216px; height: 216px; margin: 57px 0 0 20px; }
+                #fuel { width: 77px; height: 84px; margin: 90px 0 0 68px; }
+                #water-temprature { width: 84px; height: 80px; margin: -7px 0 0 62px; }
+            </style>
+
+
+
+    <table border=1>
+        <tr>
+          <td>
+            <div id="example">
+            <div id="gauge-container" class="hidden-on-narrow">
+                <div id="rpm"></div>
+                <div id="kmh"></div>
+                <div id="fuel"></div>
+                <div id="water-temprature"></div>
+            </div>
+            <div class="responsive-message"></div>
+            </div>
+          </td>
+          <td width='32px'></td>
+          <td>
+              <table border=1 width='100%'>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/key.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td colspan=2 width='64px' align='center'></td>
+                  </tr>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/engine.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td colspan=2 width='64px' align='center'></td>
+                  </tr>
+                  <tr>
+                      <td height='42px'  width='64px' align='center'><img src="{{ static_url("img/steering_wheel.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td width='64px' align='center'>-</td><td width='24px'>°</td>
+                  </tr>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/brakes.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td colspan=2 width='64px' align='center'></td>
+                  </tr>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/out_temp.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td width='64px' align='center'>-</td><td width='32px'>° C</td>
+                  </tr>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/car_temp.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td width='64px' align='center'>-</td><td width='32px'>° C</td>
+                  </tr>
+                  <tr>
+                      <td height='42px' width='64px' align='center'><img src="{{ static_url("img/fuel.png") }}" alt="" style="width:auto; height:32px;"></td>
+                      <td width='64px' align='center'>-</td><td width='32px'>km</td>
+                  </tr>
+              </table>
+          </td>
+          <td width='128px'></td>
+          <td>
+              <table border=1>
+                  <tr><td height='64px' width='64px' align='center'><img src="{{ static_url("img/play.png") }}" alt="" style="width:auto; height:48px;"></td> </tr>
+                  <tr><td height='64px' width='64px' align='center'><img src="{{ static_url("img/stop.png") }}" alt="" style="width:auto; height:48px;"></td> </tr>
+                  <tr><td height='64px' width='64px' align='center'><img src="{{ static_url("img/next.png") }}" alt="" style="width:auto; height:48px;"></td> </tr>
+                  <tr><td height='64px' width='64px' align='center'><img src="{{ static_url("img/prev.png") }}" alt="" style="width:auto; height:48px;"></td> </tr>
+              </table>
+          </td>
+        </tr>
+        <tr>
+            <td>Throttle position</td>
+            <td colspan=4>---</td>
+        </tr>
+    </table>
+
+  </body>
+</html>
+
